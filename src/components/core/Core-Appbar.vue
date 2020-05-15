@@ -3,9 +3,12 @@
         color="deep-purple accent-4"
         dense
         dark
+        clipped-left
         app
     >
-        <v-app-bar-nav-icon class="hidden-md-and-up" @click="toggleDrawer"></v-app-bar-nav-icon>
+        <!-- 在页面尺寸大于等于md的情况，隐藏 -->
+        <!-- <v-app-bar-nav-icon class="hidden-md-and-up" @click="toggleDrawer"></v-app-bar-nav-icon> -->
+        <v-app-bar-nav-icon @click="toggleDrawer"></v-app-bar-nav-icon>
         
         <v-toolbar-title>Page title</v-toolbar-title>
 

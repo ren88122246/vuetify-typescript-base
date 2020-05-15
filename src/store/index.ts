@@ -1,6 +1,7 @@
 /* eslint-disable */ 
 import Vue from 'vue'
 import Vuex from 'vuex'
+import UserStore from './core/user';
 import ArticleStore from './view/ArticleStore';
 
 Vue.use(Vuex)
@@ -50,6 +51,7 @@ export default new Vuex.Store({
     actions: {
     },
     modules: {
+        user: UserStore,
         articleStore: ArticleStore
     }
 })

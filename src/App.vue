@@ -1,14 +1,12 @@
 <template>
     <v-app>
-    <div id="app">
-
-
-      <Core-Appbar></Core-Appbar>
-      <Core-Drawer></Core-Drawer>
-      <Core-View></Core-View>
-      <Core-Footer></Core-Footer>
-      </div>
-</v-app>
+        <div id="app">
+            <Core-Appbar></Core-Appbar>
+            <Core-Drawer></Core-Drawer>
+            <Core-View></Core-View>
+            <Core-Footer></Core-Footer>
+        </div>
+    </v-app>
 </template>
 
 <style lang="scss">

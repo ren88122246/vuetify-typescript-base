@@ -11,41 +11,13 @@
 
         <v-container fluid>
             <v-row>
-                <v-col v-if="!article.prominent" sm="6" md="4" v-for="(article) in articles" :key="article.title" :value="article">
+                <v-col md="4" v-for="(article) in articles" :key="article.title" :value="article" :sm="computedSmSize(article.prominent)">
                     <feed-card :value="article"></feed-card>
-                    {{computedSmSize(article.prominent)}}
                 </v-col>
-                <!-- <v-col sm="6" md="4">
-                    <feed-card :value="value"></feed-card>
-                </v-col>
-                <v-col sm="6" md="4">
-                    <feed-card :value="value"></feed-card>
-                </v-col>
-                <v-col sm="6" md="4">
-                    <feed-card :value="value"></feed-card>
-                </v-col>
-                <v-col sm="6" md="4">
-                    <feed-card :value="value"></feed-card>
-                </v-col>
-                <v-col sm="6" md="4">
-                    <feed-card :value="value"></feed-card>
-                </v-col>
-                <v-col sm="6" md="4">
-                    <feed-card :value="value"></feed-card>
-                </v-col>
-                <v-col sm="6" md="4">
-                    <feed-card :value="value"></feed-card>
-                </v-col>
-                <v-col sm="6" md="4">
-                    <feed-card :value="value"></feed-card>
-                </v-col>
-                <v-col sm="6" md="4">
-                    <feed-card :value="value"></feed-card>
-                </v-col> -->
             </v-row>
         </v-container>
         
-        <h1>{{ msg }}</h1>
+        <!-- <h1>{{ msg }}</h1> -->
 
     </div>
 </template>
@@ -54,6 +26,8 @@
 import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
 import { State, namespace, Getter, Action, Mutation } from 'vuex-class';
 import ArticleVo from '@/entity/view/ArticleVo'
+import md5 from 'md5';
+import { getLogin } from "@/api/login";
 // @Component({
 //   components: {
 //     toolbar: () => import('@/components/core/Toolbar.vue'),
@@ -63,23 +37,54 @@ import ArticleVo from '@/entity/view/ArticleVo'
 @Component
 export default class HelloWorld extends Vue {
     @Prop() private msg!: string;
-    @Getter('links')
-    private menuDisplaySwitchAction: any;
+
+    /* TypeScript vuex vuex-class 用法 */
+    /* 1.直接取state（store里没写） */
     @State('drawer')
     private drawer: any;
+    /* 2.取state的get */
+    // @Getter('links')
+    // private menuDisplaySwitchAction: any;
+    /* 3.取namespace中的状态 */
     @namespace('articleStore').Getter('getArticleData')
     private articles: Array<ArticleVo>;
+    /* 4.array也可以这样写 */
+    // @namespace('menuStore').Getter('getMenuList')
+    // private menuList!: ArticleVo[];
+    /* 5.Boolean型 */
+    // @namespace('menuStore').Getter('getMenuDisplay')
+    // private vis!: boolean;
+    /* 6.sotre里的action */
+    // @namespace('menuStore').Action('initUserMenuAction')
+    // private initUserMenuAction: any;
+    /* 7.sotre里的action */
+    // @namespace('menuStore').Mutation('initUserMenuAction')
+    // private initUserMenuMutation: any;
 
     private smLayout = 6;
     private smSize = 6;
 
     // 生命周期
     public mounted() {
-        console.log('mounted');
+            // getLogin({
+            //     loginName: 'admin',
+            //     passWd: md5('1234567'),
+            //     captcha: '1111'
+            // }).then(res => {
+            //     console.log(res) 
+            // }).catch(err => {
+            //     console.log(err)
+            // });
+
+        /* vuex action */
+        // this.menuDisplaySwitchAction(false);
+        /* vuex mutation */
+        // this.initUserMenuMutation(false);
     }
     // 生命周期
     public created() {
         console.log('created');
+        console.log(this.articles);
     }
 
     public handleSubmit(e: any) {
@@ -91,16 +96,17 @@ export default class HelloWorld extends Vue {
         // });
     }
     public handleSelectChange(value: any) {
-        console.log(value);
         // this.form.setFieldsValue({
         // note: `Hi, ${value === 'male' ? 'man' : 'lady'}!`,
         // });
     }
 
     public computedSmSize(prominent: boolean) {
+        let smsize = 6;
         if(prominent === true) {
-            this.smSize = 12;
+            smsize = 12;
         }
+        return smsize;
     }
 
     @Watch('txt')

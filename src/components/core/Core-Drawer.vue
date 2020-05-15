@@ -1,8 +1,9 @@
 <template>
   <v-navigation-drawer
       v-model="drawer"
-      absolute
-      temporary
+      app
+      disable-resize-watcher
+      clipped
     >
       <v-list
         nav
@@ -15,7 +16,7 @@
             <v-list-item-icon>
               <v-icon>mdi-home</v-icon>
             </v-list-item-icon>
-            <v-list-item-title>Home</v-list-item-title>
+            <v-list-item-title>Homess</v-list-item-title>
           </v-list-item>
 
           <v-list-item>
